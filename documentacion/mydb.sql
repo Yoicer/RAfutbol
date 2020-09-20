@@ -229,8 +229,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`partido` (
   `cancha_c_deportivo_id_c_deportivo` INT NOT NULL,
   `cancha_c_deportivo_usuario_id_usuario` INT NOT NULL,
   `cancha_c_deportivo_campeonato_id_campeonato` INT NOT NULL,
-  PRIMARY KEY (`id_partido`, `campeonato_id_campeonato`, `reserva_id_reserva`, `arbitro_id_arbitro`, `cancha_id_cancha`, `cancha_c_deportivo_id_c_deportivo`, `cancha_c_deportivo_usuario_id_usuario`, `cancha_c_deportivo_campeonato_id_campeonato`),
-  INDEX `id_ganador` (`id_ganador` ASC, `id_perdedor` ASC) INVISIBLE)
+  PRIMARY KEY (`id_partido`, `campeonato_id_campeonato`, `reserva_id_reserva`, `arbitro_id_arbitro`, `cancha_id_cancha`, `cancha_c_deportivo_id_c_deportivo`, `cancha_c_deportivo_usuario_id_usuario`, `cancha_c_deportivo_campeonato_id_campeonato`))
 ENGINE = InnoDB;
 
 
