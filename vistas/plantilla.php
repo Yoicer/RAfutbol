@@ -1,35 +1,25 @@
 <!DOCTYPE html>
-  <html>
-  <head>
-    <title><?php echo COMPANY ?></title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html lang="es">
+<head>
+	<title>Inicio</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/main.css">
+</head>	
+<body>
+	<!-- SideBar -->
+<?php include "./vistas/modulos/navlateral.php" ;?>
 
+	<!-- Content page-->
+	<section class="full-box dashboard-contentPage">
+		<!-- NavBar -->
+<?php include "./vistas/modulos/navBar.php"; ?>
+		
+		<!-- Content page -->
+		
+	</section>
 
-  </head>
-  <body>
-
-<?php 
-        $peticionAjax=false;
-
-     
-        require_once "./controlador/vistasControlador.php";
-
-        $vt = new vistasControlador();
-        $vis = $vt->obtener_vistas_controlador();
-
-        if ($vis == "login"):
-            require_once "./vistas/contenido/login-view.php";
-
-        else:
-?>
-  		
-      <?php require_once $vis; ?>
-
-
-
-    <?php endif; ?>
-    
-  </body>
+	<!--====== Scripts -->
+<?php include "./vistas/modulos/script.php"; ?>
+</body>
 </html>
