@@ -27,7 +27,7 @@
          return $sql;
       }
       protected function eliminar_cuenta($id){
-         $sql=self::conectar()->prepare("DELETE FROM cuenta WHERE idCuenta=:id");
+         $sql=self::conectar()->prepare("DELETE FROM usuario WHERE id_usuario =:id");
          $sql->bindParam(":id",$id);
          $sql->execute();
          return $sql;
