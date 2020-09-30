@@ -1,4 +1,4 @@
-<div class="full-box login-container cover">
+<div class="full-box login-container cover" style="background-image: url(<?php echo SERVERURL; ?>vistas/assets/img/login.jpeg);">
     <form action="home.html" method="" autocomplete="off" class="logInForm">
         <p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
         <p class="text-center text-muted text-uppercase">Inicia sesión con tu cuenta</p>

@@ -17,9 +17,9 @@
             }elseif ($vistas == "index") {
                $contenido="login";
             }else{
-               $contenido="error";
+               $contenido="login";
             }
-         return $contenido;
+            return $contenido;
         }
 
    }

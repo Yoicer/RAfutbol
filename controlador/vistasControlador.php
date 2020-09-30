@@ -12,8 +12,9 @@
    			$ruta = explode("/", $_GET['views']);
    			$respuesta = vistasModelo::obtener_vistas_modelo($ruta[0]);
    		}else{
-   			$respuesta="login";
+   			$respuesta = "login";
    		}
    		return $respuesta;
-   	}
+	   }
+	   
    }
