@@ -6,7 +6,7 @@
    }
    
   class mainModel{
-   	 protected function conectar(){
+   	 protected static function conectar(){
    	 	$enlace= new PDO(SGBD, USER, PASS);
    	 	return $enlace;
    	 }

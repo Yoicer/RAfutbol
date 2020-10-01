@@ -32,13 +32,13 @@
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
 				<li>
-					<a href="home.html">
-						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
+					<a href="<?php echo SERVERURL; ?>equipo">
+						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Equipo
 					</a>
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Administración <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Partidos <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
@@ -57,7 +57,7 @@
 				</li>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
-						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Usuarios <i class="zmdi zmdi-caret-down pull-right"></i>
+						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Reservas <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
