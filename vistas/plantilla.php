@@ -1,7 +1,3 @@
-<?php 
-	session_start();
-	$peticionAjax = false;
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,14 +7,21 @@
 	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/main.css">
 </head>	
 <body>
-<?php require_once "./controlador/vistasControlador.php";
+<?php
+	$peticionAjax = false;
+	require_once "./controlador/vistasControlador.php";
 
 	$vt = new vistasControlador();
 	$vistasR = $vt->obtener_vistas_controlador();
 
-	if($vistasR == "login"){
-		require_once "./vistas/contenido/login-view.php";
+	if($vistasR == "login" || $vistasR == "error"){
+		if($vistasR == "login" ){
+			require_once "./vistas/contenido/login-view.php";
+		}else{
+			require_once "./vistas/contenido/error-view.php";
+		}
 	}else{
+		session_start();
 		include "./vistas/modulos/navlateral.php";
 ?>
 	<!-- Content page-->

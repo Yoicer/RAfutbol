@@ -53,7 +53,7 @@
    	 	       	$numero= rand(0,9);
    	 		      $letra.=$numero;
    	 	    }
-   	 	    return $letra."-".$num;
+   	 	    return $letra.$num;
    	 }
    	 protected function limpiar_cadena($cad){
       	 	$cad=trim($cad);
@@ -67,7 +67,50 @@
    	 	    $cad=str_ireplace("INSERT INTO", "", $cad);
    	 	    $cad=str_ireplace(";", "", $cad);
    	 	    return $cad;
-   	 }
+		}
+
+	protected function sweet_alert($datos){
+		if($datos['Alerta'] == "simple"){
+			$alerta = " 
+				<script>
+					swal(
+					'".$datos['Titulo']."',
+					'".$datos['Texto']."',
+					'".$datos['Tipo']."'
+					);
+				</script>
+			"; 
+		}elseif($datos['Alerta'] == "recargar"){
+			$alerta = " 
+				<script>
+					swal({
+						title: '".$datos['Titulo']."',
+						text: '".$datos['Texto']."',
+						type: '".$datos['Tipo']."',
+						confirmButtonText: 'Aceptar'
+					}).then(function(){
+						location.reload();
+					});
+				</script>
+			"; 
+		}elseif($datos['Alerta'] == "limpiar"){
+			$alerta = " 
+				<script>
+					swal({
+						title: '".$datos['Titulo']."',
+						text: '".$datos['Texto']."',
+						type: '".$datos['Tipo']."',
+						confirmButtonText: 'Aceptar'
+					}).then(function(){
+						$('.FormularioAjax')[0].reset();
+					});
+				</script>
+			"; 
+		}
+
+			 return $alerta;
+	 }
+
    	 protected function alert(){
                $alerta="
                  <script>

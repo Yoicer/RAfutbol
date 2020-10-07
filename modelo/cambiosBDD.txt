@@ -1,0 +1,4 @@
+-- 6 de octubre --
+ALTER TABLE `cuenta`
+CHANGE `clave` `clave` varchar(13) NOT NULL AFTER `id_cuenta`;
+
