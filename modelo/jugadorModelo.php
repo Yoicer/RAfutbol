@@ -18,18 +18,20 @@
                                                 ciudad, 
                                                 posicion, 
                                                 cuenta_id_cuenta, 
-                                                equipo_id_equipo  )
+                                                equipo_id_equipo 
+                                                 )
                                             VALUES (
                                                 :nombre,
                                                 :apellido,
-                                                :celular,
+                                                ':celular',
                                                 '0',
-                                                :cedula,
+                                                ':cedula',
                                                 :ciudad,
                                                 :posicion,
-                                                :id_cuenta,
-                                                '0'  );
-                                                    ");
+                                                ':id_cuenta',
+                                                '0'  
+                                            );"
+                                        );
                 $sql->bindParam(':nombre',$datos['nombre']);
                 $sql->bindParam(':apellido',$datos['apellido']);
                 $sql->bindParam(':celular',$datos['celular']);
@@ -38,6 +40,6 @@
                 $sql->bindParam(':posicion',$datos['posicion']);
                 $sql->bindParam(':id_cuenta',$datos['id_cuenta']);
                 $sql->execute();
-                return $sql['id_jugador'];
+                return $sql;
         }
     }

@@ -50,14 +50,24 @@
                             
                             $idCuenta = mainModel::agregar_cuenta($datosCuenta);
                             
+                           
                             if($idCuenta->rowCount() >= 1){
+                                echo'<script type="text/javascript">
+                                alert("Se a registrado el jugado exitosamente.");
+                                window.location.href="'.SERVERURL.'home";
+                            </script>';
                                 $datosJugador['nombre'] = $nombre; 
                                 $datosJugador['apellido'] = $apellido; 
                                 $datosJugador['cedula'] = $cedula;  
                                 $datosJugador['celular'] = $telefono; 
                                 $datosJugador['posicion'] = $posicion; 
                                 $datosJugador['ciudad'] = $ciudad; 
-                                $datosJugador['id_cuenta'] = $idCuenta;
+                                $datosJugador['id_cuenta'] = $idCuenta['id_cuenta'];
+                                
+                                echo'<script type="text/javascript">
+                                        alert("Se a registrado el jugado exitosamente.");
+                                        window.location.href="'.SERVERURL.'home";
+                                    </script>';
 
                                 $guardarJugador = jugadorModelo::agregar_jugadorModelo($datosJugador);
 

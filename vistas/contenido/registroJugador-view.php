@@ -1,5 +1,5 @@
-
-<!-- Panel nuevo Jugador -->
+<body>
+    <!-- Panel nuevo Jugador -->
 <div class="container-fluid">
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -15,7 +15,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">CEDULA *</label>
-                                    <input pattern="[0-9-]{1,30}" class="form-control" type="text" name="cedula" required="" maxlength="30">
+                                    <input pattern="[0-9-]{1,30}" class="form-control" type="number" name="cedula" required="" maxlength="30">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
@@ -33,7 +33,7 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Teléfono</label>
-                                    <input pattern="[0-9+]{1,15}" class="form-control" type="text" name="telefono" maxlength="15">
+                                    <input pattern="[0-9+]{1,15}" class="form-control" type="number" name="telefono" maxlength="15">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
@@ -45,7 +45,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <label class="control-label">Ciudad</label>
-                                    <input name="ciudad" class="form-control" rows="2" maxlength="100"></textarea>
+                                    <input name="ciudad" class="form-control" rows="2" maxlength="100">
                                 </div>
                             </div>
                         </div>
@@ -86,3 +86,4 @@
         </div>
     </div>
 </div>
+</body>
