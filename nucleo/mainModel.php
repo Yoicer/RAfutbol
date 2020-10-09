@@ -10,30 +10,35 @@
    	 	$enlace= new PDO(SGBD, USER, PASS);
    	 	return $enlace;
    	 }
-   	 protected function ejecutar_consulta_simple($consulta){
+   	 protected static function ejecutar_consulta_simple($consulta){
    	     	$respuesta=self::conectar()->prepare($consulta);
    	 	    $respuesta->execute();
    	     	return $respuesta;
    	 }
 
-     protected function agregar_cuenta($datos){
-         $sql=self::conectar()->prepare("INSERT INTO cuenta(IdCuenta,usuario,contraseña,rol) 
-            VALUES(:id,:usuario,:contraseña,:rol)");
-         $sql->bindParam(":id",$datos['id']);
-         $sql->bindParam(":usuario",$datos['usuario']);
-         $sql->bindParam(":contraseña",$datos['contraseña']);
-         $sql->bindParam(":rol",$datos['rol']);
+     protected static function agregar_cuenta($datos){
+         $sql=self::conectar()->prepare("
+							 INSERT INTO 	
+							 	`cuenta` (clave, nombre, fecha_registro, Estado, rol)
+									 VALUES (:clave, :nombre, now(), '1', :rol);"
+							);
+         $sql->bindParam(':nombre',$datos['usuario']);
+         $sql->bindParam(':clave',$datos['clave']);
+         $sql->bindParam(':rol',$datos['rol']);
          $sql->execute();
          return $sql;
       }
-      protected function eliminar_cuenta($id){
-         $sql=self::conectar()->prepare("DELETE FROM usuario WHERE id_usuario =:id");
+      protected static function eliminar_cuenta($id){
+         $sql=self::conectar()->prepare(" 
+										DELETE FROM `cuenta`
+										WHERE ((`id_cuenta` = :id));
+		      						");
          $sql->bindParam(":id",$id);
          $sql->execute();
          return $sql;
       }
 
-   	 public function encriptar($strg){
+   	 public static function encriptar($strg){
    	 	   $output=FALSE;
    	   	 $key=hash('sha256', SECRET_KEY);
      	 	 $iv=substr(hash('sha256', SECRET_IV),0, 16);
@@ -55,7 +60,7 @@
    	 	    }
    	 	    return $letra.$num;
    	 }
-   	 protected function limpiar_cadena($cad){
+   	 protected static function limpiar_cadena($cad){
       	 	$cad=trim($cad);
    	    	$cad=stripslashes($cad);
    	 	    $cad=str_ireplace("<script>", "", $cad);
@@ -69,7 +74,7 @@
    	 	    return $cad;
 		}
 
-	protected function sweet_alert($datos){
+	protected static function sweet_alert($datos){
 		if($datos['Alerta'] == "simple"){
 			$alerta = " 
 				<script>

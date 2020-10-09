@@ -14,6 +14,7 @@
         </div>
         <div class="form-group text-center">
             <input type="submit" value="Iniciar sesión" class="btn btn-info" style="color: #FFF;">
+            <a href="<?php echo SERVERURL; ?>registroJugador" style="color: #FFF;">Registarse</a>
         </div>
     </form>
 </div>
