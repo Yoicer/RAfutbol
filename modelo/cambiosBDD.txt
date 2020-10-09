@@ -2,3 +2,9 @@
 ALTER TABLE `cuenta`
 CHANGE `clave` `clave` varchar(13) NOT NULL AFTER `id_cuenta`;
 
+-- 08 octubre --
+INSERT INTO `cuenta` (`clave`, `nombre`, `fecha_registro`, `Estado`, `rol`)
+VALUES ('12345', 'Jose', now(), '1', 'Jugador');
+
+ALTER TABLE `cuenta`
+CHANGE `fecha_registro` `fecha_registro` datetime NOT NULL AFTER `nombre`;

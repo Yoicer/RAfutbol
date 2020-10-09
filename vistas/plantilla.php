@@ -14,23 +14,25 @@
 	$vt = new vistasControlador();
 	$vistasR = $vt->obtener_vistas_controlador();
 
-	if($vistasR == "login" || $vistasR == "error"){
+	if($vistasR == "login" || $vistasR == "error" || $vistasR == "registroJugador"){
 		if($vistasR == "login" ){
 			require_once "./vistas/contenido/login-view.php";
-		}else{
+		}elseif($vistasR == "error"){
 			require_once "./vistas/contenido/error-view.php";
+		}else{
+			require_once "./vistas/contenido/registroJugador-view.php";
 		}
 	}else{
 		session_start();
-		include "./vistas/modulos/navlateral.php";
+		include_once "./vistas/modulos/navlateral.php";
 ?>
 	<!-- Content page-->
 	<section class="full-box dashboard-contentPage">
 		<!-- NavBar -->
-	<?php include "./vistas/modulos/navBar.php"; ?>
+	<?php include_once "./vistas/modulos/navBar.php"; ?>
 		
 		<!-- Content page -->
-<?php include $vistasR; ?>		
+<?php require_once $vistasR; ?>		
 	</section>
 <?php } ?>
 
