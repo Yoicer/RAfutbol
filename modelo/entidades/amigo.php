@@ -62,5 +62,87 @@ class amigo {
         $this->jugador_id_jugador = $jugador_id_jugador;
     }
 
-
+    public function insertar($amigo) {
+      
+      $conexion_activa = conectar();
+     
+      $id_amigo = $amigo->getId_amigo();
+      $agregado_el = $amigo->getAgregado_el();
+      $descripcion = $amigo->getDescripcion();
+      $jugador_id_jugador = $amigo->getJugador_id_jugador();
+      
+      $query_sql = "INSERT INTO amigo ('id_amigo', 'agregado_el', 'descripcion','
+                . ' jugador_id_jugador') VALUES (NULL, $agregado_el, $descripcion,'
+                .   $id_jugador);";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al insertar ");
+        }
+        else
+        {
+            print("objeto insertado ");
+        }
+        $resultado_consulta->execute();
+        return $resultado_consulta;
+  }
+  
+  public function listar() {
+      
+      $conexion_activa = conectar();
+      $query_sql = "SELECT * FROM 'amigo'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al consultar ");
+        }
+        else
+        {
+            print("objeto consultado ");
+        }
+        $resultado_consulta->execute();
+        
+        return $resultado_consulta;
+      
+      
+  }
+  
+  public function actualizar($amigo) {
+      
+      $conexion_activa = conectar();
+     
+      $id_amigo = $amigo->getId_amigo();
+      $agregado_el = $amigo->getAgregado_el();
+      $descripcion = $amigo->getDescripcion();
+      $jugador_id_jugador = $amigo->getJugador_id_jugador();
+      
+      $query_sql = "UPDATE `amigo` SET `id_amigo` = '$id_amigo', "
+              . "`agregado_el` = '$agregado_el', `descripcion` = '$descripcion',"
+              . " `jugador_id_jugador` = '$jugador_id_jugador'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al actualizar ");
+        }
+        else
+        {
+            print("objeto actualizado ");
+        }
+        $resultado_consulta->execute();
+        
+        
+        return $resultado_consulta;
+      
+  }
+  
+  public function eliminar($id) {
+      
+       $conexion_activa = conectar();
+       
+       $query_sql = "DELETE FROM `amigo` WHERE `amigo`.`id_amigo` = '$id' ";
+       
+       $resultado_consulta->execute();
+       return $resultado_consulta;
+      
+  }
 }
