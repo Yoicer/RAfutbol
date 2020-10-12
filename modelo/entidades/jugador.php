@@ -118,6 +118,96 @@ class jugador {
         $this->equipo_id_equipo = $equipo_id_equipo;
     }
 
-
+    public function insertar($equipo) {
+      
+      $conexion_activa = conectar();
+     
+       /*private $id_equipo;
+    private $nombre;
+    private $estado;
+    private $liga;
+    private $descripcion;*/
+      
+      $id_equipo = $equipo->getId_equipo();
+      $nombre = $equipo->getNombre();
+      $estado = $equipo->getEstado();
+      $liga = $equipo->getLiga();
+      $descripcion = $equipo->getDescripcion();
+      
+      $query_sql = "INSERT INTO `equipo` (`id_equipo`, `nombre`, `estado`,"
+              . " `liga`, `descripcion`) VALUES ('$id_equipo', '$nombre', "
+              . "'$estado', '$liga','$descripcion');";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al insertar ");
+        }
+        else
+        {
+            print("objeto insertado ");
+        }
+        $resultado_consulta->execute();
+        return $resultado_consulta;
+  }
+  
+  public function listar() {
+      
+      $conexion_activa = conectar();
+      $query_sql = "SELECT * FROM 'equipo'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al consultar ");
+        }
+        else
+        {
+            print("objeto consultado ");
+        }
+        $resultado_consulta->execute();
+        
+        return $resultado_consulta;
+      
+      
+  }
+  
+  public function actualizar($equipo) {
+      
+      $conexion_activa = conectar();
+     
+      $id_equipo = $equipo->getId_equipo();
+      $nombre = $equipo->getNombre();
+      $estado = $equipo->getEstado();
+      $liga = $equipo->getLiga();
+      $descripcion = $equipo->getDescripcion();
+      
+      $query_sql = "UPDATE `equipo` SET `id_equipo` = '$id_equipo', `nombre` = '$nombre',"
+              . " `estado` = '$estado', `liga` = '$liga', `descripcion` = '$descripcion'"
+              . " WHERE `equipo`.`id_equipo` = $id_equipo;";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al actualizar ");
+        }
+        else
+        {
+            print("objeto actualizado ");
+        }
+        $resultado_consulta->execute();
+        
+        
+        return $resultado_consulta;
+      
+  }
+  
+  public function eliminar($id) {
+      
+       $conexion_activa = conectar();
+       
+       $query_sql = "DELETE FROM `equipo` WHERE `equipo`.`id_equipo` = '$id' ";
+       
+       $resultado_consulta->execute();
+       return $resultado_consulta;
+      
+  }
     
 }
