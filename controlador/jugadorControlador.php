@@ -43,11 +43,10 @@
                                 window.location.href="'.SERVERURL.'registroJugador";
                             </script>';
                         }else{
-<<<<<<< HEAD
-                           # $clave = mainModel::encriptar($clave1);
-=======
+
+
                             #$clave = mainModel::encriptar($clave1);
->>>>>>> ca7d933f7ce5b8e0afa446fdf204233e9c5b95ce
+
                             $datosCuenta['usuario'] = $usuario;
                             $datosCuenta['clave'] = $clave1;
                             $datosCuenta['rol'] = "jugador";
