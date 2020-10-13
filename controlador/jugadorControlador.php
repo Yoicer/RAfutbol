@@ -43,9 +43,9 @@
                                 window.location.href="'.SERVERURL.'registroJugador";
                             </script>';
                         }else{
-                            $clave = mainModel::encriptar($clave1);
+                           # $clave = mainModel::encriptar($clave1);
                             $datosCuenta['usuario'] = $usuario;
-                            $datosCuenta['clave'] = $clave;
+                            $datosCuenta['clave'] = $clave1;
                             $datosCuenta['rol'] = "jugador";
                             
                             $idCuenta = mainModel::agregar_cuenta($datosCuenta);
