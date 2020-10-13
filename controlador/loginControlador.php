@@ -53,4 +53,8 @@
             session_destroy();
             return header("Location: ".SERVERURL);
         }
+        public function cerrar_sesion_controlador(){
+            session_destroy();
+            return header("Location: ".SERVERURL);
+        }
     }
