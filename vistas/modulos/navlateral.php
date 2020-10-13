@@ -23,7 +23,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#!" title="Salir del sistema" class="btn-exit-system">
+						<a href="<?php echo $lc->encriptar($_SESSION['usuario_RAF']); ?>" title="Salir del sistema" class="btn-exit-system">
 							<i class="zmdi zmdi-power"></i>
 						</a>
 					</li>

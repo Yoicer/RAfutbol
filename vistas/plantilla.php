@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/main.css">
 		<!--====== Scripts -->
-<?php include "./vistas/modulos/script.php"; ?>
+<?php include "./vistas/modulos/script.php"; 
+include "./vistas/modulos/logoutScript.php";?>
 </head>	
 <body>
 <?php
@@ -43,10 +44,14 @@
 	<?php include_once "./vistas/modulos/navBar.php"; ?>
 		
 		<!-- Content page -->
-<?php require_once $vistasR; ?>		
-	</section>
-<?php } ?>
-
-
+<?php 	require_once $vistasR; ?>		
+		</section>
+<?php 
+		
+	} 
+?>
+<script>
+    $.material.init();
+</script>
 </body>
 </html>

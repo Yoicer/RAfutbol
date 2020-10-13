@@ -49,6 +49,16 @@
             return mainModel::sweet_alert($alerta);
         }
 
+        public function cerrar_sesion_controlador(){
+            session_start(['name'=> 'RAFutbol']);
+            $usuario = mainModel::descriptar($_GET['usuario']);
+            $datos['usuario'] = $usuario;
+            $datos['usuario_RAF'] = $_SESSION['usuario_RAF'];
+
+            return loginModelo::cerrar_sesion_modelo($datos);
+
+        }
+
         public function forzar_cierre_sesion_controlador(){
             session_destroy();
             return header("Location: ".SERVERURL);

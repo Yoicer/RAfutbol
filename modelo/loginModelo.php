@@ -19,4 +19,12 @@
 
             return $sql;
         }
+
+        protected static function cerrar_sesion_modelo($datos){
+                session_unset();
+                session_destroy();
+                $respuesta = "True";
+            
+            return $respuesta;
+        }
     }
