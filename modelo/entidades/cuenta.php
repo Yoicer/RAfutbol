@@ -86,6 +86,100 @@ class cuenta {
         $this->rol = $rol;
     }
 
-
+    public function insertar($cuenta) {
+      
+      $conexion_activa = conectar();
+     
+       /*private $id_cuenta;
+        private $clave;
+        private $nombre;
+        private $fecha_registro;
+        private $Estado;
+        private $rol;*/
+      
+      $id_cuenta = $cuenta->getId_cuenta();
+      $clave = $cuenta->getClave();
+      $nombre = $cuenta->getNombre();
+      $fecha_registro = $cuenta->getFecha_registro();
+      $Estado = $cuenta->getEstado();
+      $rol = $cuenta->getRol();
+      
+      $query_sql = "INSERT INTO `cuenta` (`id_cuenta`, `clave`, `nombre`, 
+          `fecha_registro`, `Estado`, `rol`) VALUES ('$id_cuenta', '$clave',
+              '$nombre','$fecha_registro', '$Estado', '$rol');";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al insertar ");
+        }
+        else
+        {
+            print("objeto insertado ");
+        }
+        $resultado_consulta->execute();
+        return $resultado_consulta;
+  }
+  
+  public function listar() {
+      
+      $conexion_activa = conectar();
+      $query_sql = "SELECT * FROM 'cuenta'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al consultar ");
+        }
+        else
+        {
+            print("objeto consultado ");
+        }
+        $resultado_consulta->execute();
+        
+        return $resultado_consulta;
+      
+      
+  }
+  
+  public function actualizar($cuenta) {
+      
+      $conexion_activa = conectar();
+     
+      $id_cuenta = $cuenta->getId_cuenta();
+      $clave = $cuenta->getClave();
+      $nombre = $cuenta->getNombre();
+      $fecha_registro = $cuenta->getFecha_registro();
+      $Estado = $cuenta->getEstado();
+      $rol = $cuenta->getRol();
+      
+      $query_sql = "UPDATE `cuenta` SET `id_cuenta` = '$id_cuenta',
+          `clave` = '$clave', `nombre` = '$nombre', `fecha_registro` = '$fecha_registro',
+              `Estado` = '$Estado', `rol` = '$rol' WHERE `cuenta`.`id_cuenta` = $id_cuenta;
+";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al actualizar ");
+        }
+        else
+        {
+            print("objeto actualizado ");
+        }
+        $resultado_consulta->execute();
+        
+        
+        return $resultado_consulta;
+      
+  }
+  
+  public function eliminar($id) {
+      
+       $conexion_activa = conectar();
+       
+       $query_sql = "DELETE FROM `cuenta` WHERE `cuenta`.`id_cuenta` = '$id' ";
+       
+       $resultado_consulta->execute();
+       return $resultado_consulta;
+      
+  }
     
 }

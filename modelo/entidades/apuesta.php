@@ -51,6 +51,85 @@ class apuesta {
     function setDescripcion($Descripcion) {
         $this->Descripcion = $Descripcion;
     }
-
+    
+    public function insertar($apuesta) {
+      
+      $conexion_activa = conectar();
+     
+      $id_apuesta = $apuesta->getId_amigo();
+      $Descripcion = $apuesta->getDescripcion();
+      $cantidad = $apuesta->getCantidad();
+      
+      
+      $query_sql = "INSERT INTO apuesta ('id_apuesta', 'Descripcion','cantidad')"
+                . " VALUES (NULL, $Descripcion, $cantidad);";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al insertar ");
+        }
+        else
+        {
+            print("objeto insertado ");
+        }
+        $resultado_consulta->execute();
+        return $resultado_consulta;
+  }
+  
+  public function listar() {
+      
+      $conexion_activa = conectar();
+      $query_sql = "SELECT * FROM 'apuesta'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al consultar ");
+        }
+        else
+        {
+            print("objeto consultado ");
+        }
+        $resultado_consulta->execute();
+        
+        return $resultado_consulta;
+      
+      
+  }
+  
+  public function actualizar($apuesta) {
+      
+      $conexion_activa = conectar();
+     
+      $id_apuesta = $apuesta->getId_amigo();
+      $Descripcion = $apuesta->getDescripcion();
+      $cantidad = $apuesta->getCantidad();
+      
+      
+      $query_sql = "UPDATE `apuesta` SET `Descripcion` = '$Descripcion',"
+              . " `cantidad` = '$cantidad'";
+      
+      $resultado_consulta = $conexion_activa->prepare($query_sql);
+      if (!$resultado_consulta = $conexion_activa->prepare($query_sql)){
+          print("error al actualizar ");
+        }
+        else
+        {
+            print("objeto insertado ");
+        }
+        $resultado_consulta->execute();
+        return $resultado_consulta;
+      
+  }
+  
+  public function eliminar($id) {
+      
+       $conexion_activa = conectar();
+       
+       $query_sql = "DELETE FROM `apuesta` WHERE `apuesta`.`id_apuesta` = '$id' ";
+       
+       $resultado_consulta->execute();
+       return $resultado_consulta;
+      
+  }
 
 }
