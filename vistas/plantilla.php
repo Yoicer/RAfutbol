@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="<?php echo SERVERURL; ?>vistas/css/main.css">
+		<!--====== Scripts -->
+<?php include "./vistas/modulos/script.php"; ?>
 </head>	
 <body>
 <?php
@@ -23,7 +25,16 @@
 			require_once "./vistas/contenido/registroJugador-view.php";
 		}
 	}else{
-		session_start();
+		session_start(['name'=> 'RAFutbol']);
+		include_once "./controlador/loginControlador.php";
+		$lc = new loginControlador();
+
+		if(!isset($_SESSION['usuario_RAF']) || !isset($_SESSION['tipo_RAF'])){
+			$lc->forzar_cierre_sesion_controlador();
+		}
+?>
+
+<?php
 		include_once "./vistas/modulos/navlateral.php";
 ?>
 	<!-- Content page-->
@@ -36,7 +47,6 @@
 	</section>
 <?php } ?>
 
-	<!--====== Scripts -->
-<?php include "./vistas/modulos/script.php"; ?>
+
 </body>
 </html>
