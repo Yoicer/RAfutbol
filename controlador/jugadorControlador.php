@@ -2,7 +2,7 @@
     if($peticionAjax){
         require_once "../modelo/jugadorModelo.php";
     }else{
-        "./modelo/jugadorModelo.php";
+       require_once "./modelo/jugadorModelo.php";
     }
 
     class jugadorControlador extends jugadorModelo{
@@ -43,41 +43,39 @@
                                 window.location.href="'.SERVERURL.'registroJugador";
                             </script>';
                         }else{
+<<<<<<< HEAD
                            # $clave = mainModel::encriptar($clave1);
+=======
+                            #$clave = mainModel::encriptar($clave1);
+>>>>>>> ca7d933f7ce5b8e0afa446fdf204233e9c5b95ce
                             $datosCuenta['usuario'] = $usuario;
                             $datosCuenta['clave'] = $clave1;
                             $datosCuenta['rol'] = "jugador";
                             
-                            $idCuenta = mainModel::agregar_cuenta($datosCuenta);
-                            
+                            $consulta3 = mainModel::ejecutar_consulta_simple(" SELECT id_cuenta FROM `cuenta`");
+                            $numeroID =($consulta3->rowCount())+1;
+
+                            $cuenta = mainModel::agregar_cuenta($datosCuenta);
+                         
+                            if($cuenta){
                            
-                            if($idCuenta->rowCount() >= 1){
-                                echo'<script type="text/javascript">
-                                alert("Se a registrado el jugado exitosamente.");
-                                window.location.href="'.SERVERURL.'home";
-                            </script>';
                                 $datosJugador['nombre'] = $nombre; 
                                 $datosJugador['apellido'] = $apellido; 
                                 $datosJugador['cedula'] = $cedula;  
                                 $datosJugador['celular'] = $telefono; 
                                 $datosJugador['posicion'] = $posicion; 
                                 $datosJugador['ciudad'] = $ciudad; 
-                                $datosJugador['id_cuenta'] = $idCuenta['id_cuenta'];
+                                $datosJugador['id_cuenta'] = $numeroID;
                                 
-                                echo'<script type="text/javascript">
-                                        alert("Se a registrado el jugado exitosamente.");
-                                        window.location.href="'.SERVERURL.'home";
-                                    </script>';
-
                                 $guardarJugador = jugadorModelo::agregar_jugadorModelo($datosJugador);
 
-                                if($guardarJugador->rowCount() >= 1){
+                                if($guardarJugador){
                                     echo'<script type="text/javascript">
                                         alert("Se a registrado el jugado exitosamente.");
                                         window.location.href="'.SERVERURL.'home";
                                     </script>';
                                 }else{
-                                    mainModel::eliminar_cuenta($idCuenta);
+                                    mainModel::eliminar_cuenta($numeroID);
                                     
                                 }
 
