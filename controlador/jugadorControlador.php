@@ -71,7 +71,7 @@
                                 if($guardarJugador){
                                     echo'<script type="text/javascript">
                                         alert("Se a registrado el jugado exitosamente.");
-                                        window.location.href="'.SERVERURL.'home";
+                                        window.location.href="'.SERVERURL.'";
                                     </script>';
                                 }else{
                                     mainModel::eliminar_cuenta($numeroID);
@@ -85,5 +85,15 @@
                     }
             }
 
+        }
+
+        public function Obtener_jugadorXidcuentaControlador(){
+
+            
+            $id_cuenta = $_SESSION['idCuenta_RAF'];
+          
+            $jugador = jugadorModelo::Obtener_jugadorXidcuentaModelo($id_cuenta);
+            
+            return $jugador;
         }
     }

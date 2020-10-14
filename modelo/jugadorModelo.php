@@ -35,4 +35,18 @@
                 $sql->execute();
                 return $sql;
         }
+
+        protected static function Obtener_jugadorXidcuentaModelo($id_cuenta){
+            
+            $sql = mainModel::conectar()->prepare("
+                                                 SELECT * FROM jugador
+                                                    WHERE cuenta_id_cuenta = :id_cuenta
+                                                ");
+            $sql->bindParam(':id_cuenta',$id_cuenta);
+            
+            $sql->execute();
+           
+            return $sql->fetchAll();
+
+        }
     }

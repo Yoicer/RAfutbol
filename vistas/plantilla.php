@@ -14,24 +14,36 @@ include "./vistas/modulos/logoutScript.php";?>
 	$peticionAjax = false;
 	require_once "./controlador/vistasControlador.php";
 
+
 	$vt = new vistasControlador();
 	$vistasR = $vt->obtener_vistas_controlador();
 
-	if($vistasR == "login" || $vistasR == "error" || $vistasR == "registroJugador"){
+	if($vistasR == "login" || $vistasR == "error"){
 		if($vistasR == "login" ){
 			require_once "./vistas/contenido/login-view.php";
-		}elseif($vistasR == "error"){
-			require_once "./vistas/contenido/error-view.php";
 		}else{
-			require_once "./vistas/contenido/registroJugador-view.php";
+			require_once "./vistas/contenido/error-view.php";
 		}
 	}else{
 		session_start(['name'=> 'RAFutbol']);
 		include_once "./controlador/loginControlador.php";
 		$lc = new loginControlador();
 
+		if($vistasR == "registroJugador"){
+			$_SESSION['usuario_RAF'] = "registro";
+			$_SESSION['tipo_RAF'] = "Jugador";
+		}
 		if(!isset($_SESSION['usuario_RAF']) || !isset($_SESSION['tipo_RAF'])){
-			$lc->forzar_cierre_sesion_controlador();
+			if($vistasR != "registroJugador"){
+				#$lc->forzar_cierre_sesion_controlador();
+			}
+			
+		}
+
+		if($_SESSION['tipo_RAF'] == "jugador"){
+			require_once "./controlador/jugadorControlador.php";
+				$jugador = new jugadorControlador();
+				$usuario = $jugador->Obtener_jugadorXidcuentaControlador();
 		}
 ?>
 
