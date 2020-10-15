@@ -22,7 +22,7 @@
 			  		</a>
                   </li>
 <?php
-                if( $_SESSION['tipo_RAF'] != "administrador"){
+                if( $_SESSION['tipo_RAF'] == "jugador"){
 ?>
 			  	<li>
                   <a href="<?php echo SERVERURL; ?>agregarEquipo" class="btn btn-info">
