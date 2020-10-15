@@ -17,13 +17,11 @@
                                                                 THEN 'Inactivo'
                                                             END AS estado_nombre,
                                                     CASE equipo.liga
-                                                                WHEN '0'
-                                                                THEN 'Novato'
-                                                                WHEN '1'
-                                                                THEN 'Principiante'
-                                                    WHEN '2'
+                                                        WHEN '0'
+                                                            THEN 'Novato'
+                                                         WHEN '1'
                                                                 THEN 'Intermedio'
-                                                    WHEN '3'
+                                                         WHEN '2'
                                                                 THEN 'Avanzado'
                                                             END AS liga_nombre
                                                     FROM equipo
