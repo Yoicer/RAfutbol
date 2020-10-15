@@ -5,7 +5,6 @@
        require_once "./modelo/equipoModelo.php";
     }
 
-
     class equipoControlador extends equipoModelo{
 
         public function obtener_equiposControlador(){
@@ -27,5 +26,46 @@
             }
             
         }
+
+        public function agregar_equipoControlador(){
+
+            $nombre = mainModel::limpiar_cadena($_POST['nombre']);
+            $descripcion = mainModel::limpiar_cadena($_POST['descripcion']);
+            $ciudad = mainModel::limpiar_cadena($_POST['ciudad']);
+            $id_jugador = mainModel::limpiar_cadena($_POST['id_jugador']); 
+
+            
+            $consulta1 = mainModel::ejecutar_consulta_simple("
+                                                    SELECT nombre FROM equipo WHERE nombre = $nombre"
+                                                );
+
+                if($consulta1->rowCount() >= 1){
+                    $alerta['Alerta'] = "simple";
+                    $alerta['Titulo'] = "Nombre de equipo ocupado";
+                    $alerta['Texto'] = "El nombre que ha ingresado para su equipo no esta disponible";
+                    $alerta['Tipo'] = "error";
+                }else{
+                    $datosEquipo['nombre'] = $nombre;
+                    $datosEquipo['descripcion'] = $descripcion;
+                    $datosEquipo['ciudad'] = $ciudad;
+                    
+                    $consulta2 = mainModel::ejecutar_consulta_simple(" SELECT id_equipo FROM equipo");
+                    $id_equipo =($consulta2->rowCount())+1;
+
+                    $datosJugador['id_jugador'] = $id_jugador;
+                    $datosJugador['id_equipo'] = $id_equipo;
+                    
+                    if(equipoModelo::agregar_equipoModelo($datosEquipo)){
+                        if(equipoModelo::asignarJugador_equipoModelo($datosJugador)){
+                            $alerta['Alerta'] = "simple";
+                            $alerta['Titulo'] = "Equipo creado";
+                            $alerta['Texto'] = "El equipo se ha creado correctamente";
+                            $alerta['Tipo'] = "success";
+                        }
+                    }
+                }
+            return mainModel::sweet_alert($alerta);
+        }
+           
 
     }

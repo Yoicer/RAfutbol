@@ -3,11 +3,11 @@
     require_once "../nucleo/configGeneral.php";
 
     if(isset($_POST['nombre'])){
-        require_once "../controlador/equipoControlador.php";
+        require_once "../controlador/campeonatoControlador.php";
 
-        $equipo = new equipoControlador();
+        $campeonato = new campeonatoControlador();
 
-        echo $equipo->agregar_equipoControlador();   
+        echo $campeonato->agregar_campeonatoControlador();   
 
     }else{
         session_start();

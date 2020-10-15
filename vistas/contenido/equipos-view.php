@@ -1,5 +1,11 @@
 <?php
-    require_once "./controlador/equipoControlador.php";
+	require_once "./controlador/equipoControlador.php";
+	require_once "./controlador/jugadorControlador.php";
+
+	if($_SESSION['tipo_RAF'] == "jugador"){
+        $jugador = new jugadorControlador();
+		$usuario = $jugador->Obtener_jugadorXidcuentaControlador();
+	}
 
     $equipo = new equipoControlador();
     $equipos = $equipo->obtener_equiposControlador();
@@ -22,7 +28,8 @@
 			  		</a>
                   </li>
 <?php
-                if( $_SESSION['tipo_RAF'] == "jugador"){
+                if( $_SESSION['tipo_RAF'] == "jugador" ){
+					if($usuario[0]['equipo_id'] == '0'){
 ?>
 			  	<li>
                   <a href="<?php echo SERVERURL; ?>agregarEquipo" class="btn btn-info">
@@ -30,7 +37,8 @@
 			  		</a>
                   </li>
 <?php 
-                }
+					}
+				}
 ?>
 			</ul>
 		</div>
@@ -52,8 +60,7 @@
 									<th class="text-center">ESTADO</th>
 									<th class="text-center">LIGA</th>
 									<th class="text-center">DESCRIPCION</th>
-                                    <th class="text-center">EDITAR</th>
-                                    <th class="text-center">ELIMINAR</th>
+
 								</tr>
 							</thead>
 							<tbody>

@@ -1,4 +1,4 @@
-<body>
+
     <!-- Panel nuevo Jugador -->
 <div class="container-fluid">
     <div class="panel panel-info">
@@ -86,4 +86,4 @@
         </div>
     </div>
 </div>
-</body>
+

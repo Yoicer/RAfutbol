@@ -51,8 +51,9 @@ include "./vistas/modulos/logoutScript.php";?>
 		include_once "./vistas/modulos/navlateral.php";
 ?>
 	<!-- Content page-->
+			<!-- NavBar -->
+
 	<section class="full-box dashboard-contentPage">
-		<!-- NavBar -->
 	<?php include_once "./vistas/modulos/navBar.php"; ?>
 		
 		<!-- Content page -->

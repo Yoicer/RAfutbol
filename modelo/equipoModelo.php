@@ -44,31 +44,43 @@
         
         protected static function agregar_equipoModelo($datos){
                 $sql = mainModel::conectar()->prepare("
-                                            INSERT INTO `equipo` (
-                                                nombre, apellido, celular, nivel, cedula, ciudad, posicion, 
-                                                cuenta_id_cuenta, equipo_id_equipo 
-                                                 )
-                                            VALUES (
-                                                :nombre,
-                                                :apellido,
-                                                :celular,
-                                                '0',
-                                                :cedula,
-                                                :ciudad,
-                                                :posicion,
-                                                :id_cuenta,
-                                                '0'  
+                                                INSERT INTO equipo
+                                                    (
+                                                        nombre, 
+                                                        estado, 
+                                                        liga, 
+                                                        descripcion, 
+                                                        ciudad
+                                                    )
+                                                VALUES (
+                                                    :nombre, 
+                                                    '0', 
+                                                    '0', 
+                                                    :descripcion, 
+                                                    :ciudad
+                                                );  
                                             );"
                                         );
                 $sql->bindParam(':nombre',$datos['nombre']);
-                $sql->bindParam(':apellido',$datos['apellido']);
-                $sql->bindParam(':celular',$datos['celular']);
-                $sql->bindParam(':cedula',$datos['cedula']);
+                $sql->bindParam(':descripcion',$datos['descripcion']);
                 $sql->bindParam(':ciudad',$datos['ciudad']);
-                $sql->bindParam(':posicion',$datos['posicion']);
-                $sql->bindParam(':id_cuenta',$datos['id_cuenta']);
                 $sql->execute();
                 return $sql;
+        }
+
+        protected static function asignarJugador_equipoModelo($datos){
+            $sql = mainModel::conectar()->prepare("
+                                            UPDATE jugador 
+                                            SET
+                                            equipo_id = :id_equipo
+                                            WHERE id_jugador = :id_jugador AND equipo_id = '0';
+                                                ");
+            $sql->bindParam(':id_equipo',$datos['id_equipo']);
+            $sql->bindParam(':id_jugador',$datos['id_jugador']);
+            
+            $sql->execute();
+           
+            return $sql;
         }
         
         protected static function actualizar_equipoModelo($datos){
