@@ -3,11 +3,6 @@
         <li class="pull-left">
             <a href="#!" class="btn-menu-dashboard"><i class="zmdi zmdi-more-vert"></i></a>
         </li>
-        <li>
-            <a href="search.html" class="btn-search">
-                <i class="zmdi zmdi-search"></i>
-            </a>
-        </li>
     </ul>
 </nav>
 
