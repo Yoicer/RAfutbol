@@ -4,7 +4,9 @@
 
         protected static function obtener_vistas_modelo($vistas){
 
-            $listaBlanca=["login","home","error", "registroJugador"];
+            $listaBlanca=["login","home","error", "registroJugador","equipos", "agregarEquipo", "editarEquipo",
+                           "cDeportivos","agregarCDeportivo", "campeonatos"
+                     ];
             
             if (in_array($vistas , $listaBlanca)) {
                if (is_file("./vistas/contenido/".$vistas."-view.php")) {

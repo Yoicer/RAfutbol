@@ -7,8 +7,7 @@
 
         $jugador = new jugadorControlador();
 
-        echo $jugador->agregar_jugadorControlador();    
-        echo "hola";    
+        echo $jugador->agregar_jugadorControlador();      
     }else{
         session_start();
         session_destroy();
