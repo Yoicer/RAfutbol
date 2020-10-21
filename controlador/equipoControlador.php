@@ -23,6 +23,7 @@
                 $alerta['Texto'] = "Se ha eliminado correctamente el equipo";
                 $alerta['Tipo'] = "error";
                 echo mainModel::sweet_alert($alerta);
+  
             }
             
         }

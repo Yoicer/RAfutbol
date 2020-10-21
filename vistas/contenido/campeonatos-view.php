@@ -68,16 +68,10 @@
                                         echo "<th scope='col'>".$campt['cd_nombre']."</th>";
                                         echo "<th scope='col'>".$campt['direccion']."</th>";
                                         echo "<th scope='col'>".$campt['ciudad']."</th>";
-                                        echo "<th scope='col'>".$campt['liga_nombre']."</th>";
+										echo "<th scope='col'>".$campt['liga_nombre']."</th>";
+										
+										if($_SESSION['tipo_RAF'] == "administrador"){
 ?>
-									<td>
-                                        <form action="<?php echo SERVERURL; ?>editarCampeonato" method="POST">
-                                            <input name="id_editar" value="<?php echo $eqp['id_campeonato'] ?>" hidden >
-											<button type="submit" class="btn btn-info btn-raised btn-xs">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-										</form>
-                                    </td>
                                     <td>
                                         <form action="" method="POST">
                                             <input name="id_eliminar" value="<?php echo $eqp['id_campeonato'] ?>" hidden >
@@ -85,7 +79,21 @@
 												<i class="zmdi zmdi-delete"></i>
 											</button>
 										</form>
-                                    </td>
+									</td>
+									<?php
+									}elseif($_SESSION['tipo_RAF'] == "jugador"){
+?>
+									 <td>
+                                        <form action="" method="POST">
+                                            <input name="id_unirse" value="<?php echo $campt['id_campeonato'] ?>" hidden >
+											<button type="submit" class="btn btn-info btn-raised btn-xs">
+												<i class="zmdi zmdi-arrow-left-bottom"></i>
+											</button>
+										</form>
+									</td>
+<?php
+									}
+?>
                                     </tr>
 <?php                             }
 ?>

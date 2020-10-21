@@ -2,10 +2,6 @@
 	require_once "./controlador/equipoControlador.php";
 	require_once "./controlador/jugadorControlador.php";
 
-	if($_SESSION['tipo_RAF'] == "jugador"){
-        $jugador = new jugadorControlador();
-		$usuario = $jugador->Obtener_jugadorXidcuentaControlador();
-	}
 
     $equipo = new equipoControlador();
     $equipos = $equipo->obtener_equiposControlador();
@@ -33,10 +29,16 @@
 ?>
 			  	<li>
                   <a href="<?php echo SERVERURL; ?>agregarEquipo" class="btn btn-info">
-			  			<i class="zmdi zmdi-plus"></i> &nbsp; NUEVO EQUIPO
+			  			<i class="zmdi zmdi-plus"></i> &nbsp; CREAR EQUIPO
 			  		</a>
                   </li>
 <?php 
+					}else{
+?>
+						<a href="<?php echo SERVERURL; ?>equipo?i=<? echo $usuario[0]['equipo_id'];?>" class="btn btn-info">
+							<i class="zmdi zmdi-accounts-alt"></i> &nbsp; MI EQUIPO
+						</a>
+<?php
 					}
 				}
 ?>
@@ -57,9 +59,9 @@
 									<th class="text-center">#</th>
 									<th class="text-center">NOMBRE</th>
 									<th class="text-center">UBICACION</th>
-									<th class="text-center">ESTADO</th>
 									<th class="text-center">LIGA</th>
 									<th class="text-center">DESCRIPCION</th>
+									<th class="text-center">Miembros</th>
 
 								</tr>
 							</thead>
@@ -70,27 +72,36 @@
                                         echo "<th scope='col'>".$eqp['id_equipo']."</th>";
                                         echo "<th scope='col'>".$eqp['nombre']."</th>";
                                         echo "<th scope='col'>".$eqp['ciudad']."</th>";
-                                        echo "<th scope='col'>".$eqp['estado_nombre']."</th>";
                                         echo "<th scope='col'>".$eqp['liga_nombre']."</th>";
-                                        echo "<th scope='col'>".$eqp['descripcion']."</th>";
+										echo "<th scope='col'>".$eqp['descripcion']."</th>";
+										echo "<th scope='col'>".$eqp['miembros']."/14</th>";
+
+									if($_SESSION['tipo_RAF'] == "administrador"){
 ?>
-									<td>
-                                        <form action="<?php echo SERVERURL; ?>editarEquipo" method="POST">
-                                            <input name="id_editar" value="<?php echo $eqp['id_equipo'] ?>" hidden >
-											<button type="submit" class="btn btn-info btn-raised btn-xs">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-										</form>
-                                    </td>
                                     <td>
-                                        <form action="" method="POST">
+                                        <form action="" method="POST" >
                                             <input name="id_eliminar" value="<?php echo $eqp['id_equipo'] ?>" hidden >
 											<button type="submit" class="btn btn-danger btn-raised btn-xs">
 												<i class="zmdi zmdi-delete"></i>
 											</button>
 										</form>
-                                    </td>
-                                    </tr>
+									</td>
+<?php
+									}elseif($_SESSION['tipo_RAF'] == "jugador" AND $usuario[0]['equipo_id'] == '0'){
+?>
+									 <td>
+                                        <form action="" method="POST">
+                                            <input name="id_unirse" value="<?php echo $eqp['id_equipo'] ?>" hidden >
+											<button type="submit" class="btn btn-info btn-raised btn-xs">
+												<i class="zmdi zmdi-arrow-left-bottom"></i>
+											</button>
+										</form>
+									</td>
+<?php
+									}
+?>
+									</tr>
+									
 <?php                             }
 ?>
 							</tbody>

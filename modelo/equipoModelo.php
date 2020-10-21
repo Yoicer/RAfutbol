@@ -9,23 +9,26 @@
 
         protected static function obtener_equiposModelo(){
             $sql = mainModel::conectar()->prepare("
-                                                    SELECT *,
-                                                    CASE equipo.estado
-                                                                WHEN '1'
-                                                                THEN 'Activo'
-                                                                WHEN '2'
-                                                                THEN 'Inactivo'
-                                                            END AS estado_nombre,
+                                                SELECT equipo.id_equipo,
+                                                    equipo.nombre,
+                                                    equipo.ciudad,
+                                                    equipo.descripcion,                            
                                                     CASE equipo.liga
                                                         WHEN '0'
                                                             THEN 'Novato'
-                                                         WHEN '1'
+                                                        WHEN '1'
                                                                 THEN 'Intermedio'
-                                                         WHEN '2'
+                                                        WHEN '2'
                                                                 THEN 'Avanzado'
-                                                            END AS liga_nombre
-                                                    FROM equipo
-                                        ");
+                                                
+                                                            END AS liga_nombre,
+                                                    COUNT(jugador.id_jugador) AS miembros
+                                                FROM equipo
+                                                LEFT JOIN jugador
+                                                            ON jugador.equipo_id = equipo.id_equipo 
+                                                WHERE equipo.estado = 1
+                                                GROUP BY equipo.id_equipo
+                                    ");
             $sql->execute();
 
             return $sql;
@@ -54,7 +57,7 @@
                                                     )
                                                 VALUES (
                                                     :nombre, 
-                                                    '0', 
+                                                    '1', 
                                                     '0', 
                                                     :descripcion, 
                                                     :ciudad
