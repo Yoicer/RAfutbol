@@ -8,6 +8,9 @@
 
     if(isset($_POST['id_eliminar'])){
         $equipo->eliminar_equipoControlador();
+	}
+	if(isset($_POST['id_unirse'])){
+        $equipo->asignarJugador_equipoControlador();
     }
 ?>
 <div class="container-fluid">
@@ -35,7 +38,7 @@
 <?php 
 					}else{
 ?>
-						<a href="<?php echo SERVERURL; ?>equipo?i=<? echo $usuario[0]['equipo_id'];?>" class="btn btn-info">
+						<a href="<?php echo SERVERURL; ?>equipo" class="btn btn-info">
 							<i class="zmdi zmdi-accounts-alt"></i> &nbsp; MI EQUIPO
 						</a>
 <?php
@@ -60,8 +63,9 @@
 									<th class="text-center">NOMBRE</th>
 									<th class="text-center">UBICACION</th>
 									<th class="text-center">LIGA</th>
+									<th class="text-center">CAPITAN</th>
 									<th class="text-center">DESCRIPCION</th>
-									<th class="text-center">Miembros</th>
+									<th class="text-center">MIEMBROS</th>
 
 								</tr>
 							</thead>
@@ -72,11 +76,13 @@
                                         echo "<th scope='col'>".$eqp['id_equipo']."</th>";
                                         echo "<th scope='col'>".$eqp['nombre']."</th>";
                                         echo "<th scope='col'>".$eqp['ciudad']."</th>";
-                                        echo "<th scope='col'>".$eqp['liga_nombre']."</th>";
+										echo "<th scope='col'>".$eqp['liga_nombre']."</th>";
+										echo "<th scope='col'>".$eqp['capitan']."</th>";
 										echo "<th scope='col'>".$eqp['descripcion']."</th>";
 										echo "<th scope='col'>".$eqp['miembros']."/14</th>";
 
 									if($_SESSION['tipo_RAF'] == "administrador"){
+										if($eqp['miembros'] < 7){
 ?>
                                     <td>
                                         <form action="" method="POST" >
@@ -86,12 +92,15 @@
 											</button>
 										</form>
 									</td>
+										
 <?php
+										}
 									}elseif($_SESSION['tipo_RAF'] == "jugador" AND $usuario[0]['equipo_id'] == '0'){
 ?>
 									 <td>
-                                        <form action="" method="POST">
+                                        <form action="" method="POST" >
                                             <input name="id_unirse" value="<?php echo $eqp['id_equipo'] ?>" hidden >
+											<input hidden name="id_jugador" value="<?php echo $usuario[0]['id_jugador']; ?>">
 											<button type="submit" class="btn btn-info btn-raised btn-xs">
 												<i class="zmdi zmdi-arrow-left-bottom"></i>
 											</button>
