@@ -12,9 +12,6 @@
 		$cd = $c_deportivo->Obtener_cdXidcuentaControlador($id_cuenta);
 		$id_cd = $cd['id_c_deportivo'];
 
-	}elseif($rol == "jugador"){
-		$id_equipo = $usuario[0]['equipo_id'];
-		$id_jugador = $usuario[0]['id_jugador'];
 	}
 
     if(isset($_POST['id_eliminar'])){
@@ -99,9 +96,7 @@
 ?>
 								<td>
 								<form action="<?php echo SERVERURL; ?>campeonato" method="POST">
-									<input name="id_unirse" value="<?php echo $campt['id_campeonato']; ?>" hidden >
-									<input name="id_equipo" value="<?php echo $id_equipo; ?>" hidden >
-									<input name="id_jugador" value="<?php echo $id_jugador; ?>" hidden >
+									<input name="id_camp" value="<?php echo $campt['id_campeonato']; ?>" hidden >
 									<button type="submit" class="btn btn-info btn-raised btn-xs">
 										<i class="zmdi zmdi-arrow-left-bottom"></i>
 									</button>

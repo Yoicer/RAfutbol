@@ -30,10 +30,10 @@
     }
 ?>
 <div class="container-fluid">
-			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-calendar"></i> RESERVAS </h1>
-			</div>
-		</div>
+	<div class="page-header">
+		<h1 class="text-titles"><i class="zmdi zmdi-calendar"></i> RESERVAS </h1>
+	</div>
+</div>
 
 		<div class="container-fluid">
 			<ul class="breadcrumb breadcrumb-tabs">
@@ -56,7 +56,7 @@
 			</ul>
 		</div>
 
-		<!-- Panel nuevo administrador -->
+	
 		<div class="container-fluid">
 			<div class="panel panel-success">
 				<div class="panel-heading">

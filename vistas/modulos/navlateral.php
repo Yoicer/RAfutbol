@@ -54,6 +54,11 @@
 						<i class="zmdi zmdi-slideshare"></i> Campeonatos
 					</a>
 				</li>
+				<li>
+					<a href="<?php echo SERVERURL; ?>retos">
+						<i class="zmdi zmdi-inbox"></i> Retos
+					</a>
+				</li>
 				
 			</ul>
 		</div>

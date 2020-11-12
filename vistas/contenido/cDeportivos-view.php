@@ -3,7 +3,11 @@
 
 
     $c_deportivo = new c_deportivoControlador();
-    $c_deportivos = $c_deportivo->obtener_cDeportivosControlador();
+	$c_deportivos = $c_deportivo->obtener_cDeportivosControlador();
+	
+	if(isset($_POST['id_eliminar'])){
+		$c_deportivo->eliminar_cDeportivoControlador();
+	}
 
 ?>
 <div class="container-fluid">
@@ -55,7 +59,10 @@
 <?php
 								if($_SESSION['tipo_RAF'] == "administrador" ){
 ?>
-								<a href="#" class="btn btn-delete">ELIMINAR</a>
+								<form action="" method="POST"> 
+									<input name="id_eliminar" value="<?php echo $cd['id_c_deportivo'] ?>" hidden >
+									<button type="submit" class="btn btn-primary">ELIMINAR</button>
+								</form>
 <?php							}
 ?>
                             </div>

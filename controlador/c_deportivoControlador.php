@@ -19,6 +19,7 @@
             $c_deportivo = c_deportivoModelo::obtenerXid_c_deportivoModelo($id);
             return $c_deportivo;
         }
+
         public function obtenercanchasControlador($id){
 
             $canchas = c_deportivoModelo::obtenercanchasModelo($id);
@@ -31,5 +32,19 @@
             $cd = c_deportivoModelo::Obtener_cdXidcuentaModelo($id_cuenta);
             
             return $cd;
+        }
+        
+        public function eliminar_cDeportivoControlador(){
+          
+            $id_cd = $_POST['id_eliminar'];
+
+            if(c_deportivoModelo::eliminar_cDeportivoModelo($id_cd)){
+                $alerta['Alerta'] = "simple";
+                $alerta['Titulo'] = "Centro deportivo eliminado";
+                $alerta['Texto'] = "Se eliminado el centro deportivo correctamente";
+                $alerta['Tipo'] = "success";
+            }
+            echo mainModel::sweet_alert($alerta);
+
         }
     }

@@ -15,10 +15,56 @@
         }
         
         public function obtener_campeonatoXidControlador(){
-            $id = $_POST['id_unirse'];
+            $id = $_POST['id_camp'];
             $campeonato = campeonatoModelo::obtener_campeonatoXidModelo($id);
 
             return $campeonato;
+        }
+        
+        public function agregarEquipo_campeonatoControlador(){
+
+            $campeonato = mainModel::limpiar_cadena($_POST['id_unirse']);
+            $equipo = mainModel::limpiar_cadena($_POST['id_equipo']);
+            $jugador = mainModel::limpiar_cadena($_POST['id_jugador']);
+
+            $datos['cp'] = $campeonato;
+            $datos['eq'] = $equipo;
+            $datos['jg'] = $jugador;
+            var_dump($datos);
+            $consulta1 = mainModel::ejecutar_consulta_simple("
+                                                SELECT * FROM equipo_campeonato as ec
+                                                INNER JOIN equipo as p
+                                                     ON ec.equipo_id_equipo = p.id_equipo
+                                                WHERE ec.campeonato_id_campeonato = $campeonato
+                                                ");
+            if($consulta1->rowCount() >= 1){
+                $alerta['Alerta'] = "simple";
+                $alerta['Titulo'] = "Equipo Inscrito";
+                $alerta['Texto'] = "El equipo ya se encuentra inscrito en el campeonato";
+                $alerta['Tipo'] = "error";
+            }else{
+                $consulta2 = mainModel::ejecutar_consulta_simple("
+                                            SELECT * 
+                                            FROM equipo
+                                            WHERE id_equipo = $equipo AND creado_por = $jugador
+                                                ");
+                if($consulta2->rowCount() >= 1){
+                    if(campeonatoModelo::agregarEquipo_campeonatoModelo($datos)){
+                        $alerta['Alerta'] = "simple";
+                        $alerta['Titulo'] = "Inscripcion Realizada";
+                        $alerta['Texto'] = "El equipo se ha inscrito correctamente al campeonato";
+                        $alerta['Tipo'] = "success";
+                    }
+                }else{
+                    $alerta['Alerta'] = "simple";
+                    $alerta['Titulo'] = "Inscripcion invalida";
+                    $alerta['Texto'] = "Para inscribir un equipo lo debe hacer el capitan, pida a su capitan de equipo que realize la inscripcion";
+                    $alerta['Tipo'] = "error";
+                }
+
+            }
+
+            echo mainModel::sweet_alert($alerta);
         }
 
         public function eliminar_campeonatoControlador(){
@@ -64,6 +110,13 @@
                     $alerta['Texto'] = "Las fechas de apertura o final presentan inconvenintes, asegurese de que sean fechas posteriores al dia de hoy";
                     $alerta['Tipo'] = "error";
             }
-        return mainModel::sweet_alert($alerta);
+            return mainModel::sweet_alert($alerta);
+        }
+
+        public function obtenerEquipos_campeonatoControlador(){
+            $id = $_POST['id_camp'];
+
+            $equipos = campeonatoModelo::obtenerEquipos_campeonatoModelo($id);
+            return $equipos;
         }
     }

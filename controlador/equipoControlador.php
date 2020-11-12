@@ -113,6 +113,12 @@
                 }
             return mainModel::sweet_alert($alerta);
         }
+
+        public function obtenerCampeonatos_equipoControlador($id){
+            $id_equipo = $id;
+            $campeonatos = equipoModelo::obtenerCampeonatos_equipoModelo($id_equipo);
+           return $campeonatos;
+        }
            
 
     }

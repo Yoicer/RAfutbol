@@ -43,9 +43,10 @@
                 $alerta['Alerta'] = "simple";
                 $alerta['Titulo'] = "Reserva eliminada";
                 $alerta['Texto'] = "Se ha cancelado correctamenta la reserva";
-                $alerta['Tipo'] = "error";
-                echo mainModel::sweet_alert($alerta);
+                $alerta['Tipo'] = "success";
             }
+
+            echo mainModel::sweet_alert($alerta);
 
         }
 

@@ -90,11 +90,13 @@
         }
         
         protected static function eliminar_reservaModelo($id){
+            $hoy = date("Y-m-d");
             $sql = mainModel::conectar()->prepare("
                                             DELETE FROM reserva
-                                            WHERE id_reserva = :id
+                                            WHERE id_reserva = :id AND fecha > ':hoy'
                                             ;");
             $sql->bindParam("id", $id);
+            $sql->bindParam("hoy", $hoy);
 
             $sql->execute();
 

@@ -55,4 +55,15 @@
 
             return $sql->fetch();
         }
+
+        protected static function eliminar_cDeportivoModelo($id_cd){
+            $sql = mainModel::conectar()->prepare("
+                                                DELETE FROM c_deportivo
+                                                WHERE ((`id_c_deportivo` = :id));
+                                             ");
+            $sql->bindParam(':id', $id_cd);
+            $sql->execute();
+
+            return $sql;
+        }
     }

@@ -150,6 +150,34 @@
 
             return $sql;
         }
+        
+        protected static function obtenerCampeonatos_equipoModelo($id){
+
+            $sql = mainModel::conectar()->prepare("
+                                            SELECT *, c.nombre AS campeonato, cd.nombre AS cd,
+                                            CASE c.tipo
+                                                WHEN '0'
+                                                        THEN 'Novato'
+                                                WHEN '1'
+                                                    THEN 'Intermedio'
+                                                WHEN '2'
+                                                    THEN 'Avanzado'
+                                                END AS liga_nombre
+                                            FROM equipo AS e
+                                            INNER JOIN equipo_campeonato AS ec
+                                                ON ec.equipo_id_equipo = e.id_equipo
+                                            INNER JOIN campeonato AS c
+                                                ON ec.campeonato_id_campeonato = c.id_campeonato
+                                            INNER JOIN c_deportivo AS cd
+                                                ON c.c_deportivo_id = cd.id_c_deportivo
+                                            WHERE e.id_equipo = :id_equipo
+                                                ");
+
+            $sql->bindParam(':id_equipo',$id);
+            $sql->execute();
+
+            return $sql;
+        }
 
         protected static function obtenerXid_equipoModelo($id_equipo){
             

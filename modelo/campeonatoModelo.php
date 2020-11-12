@@ -95,6 +95,43 @@
 
             return $sql;
         }
+        
+        protected static function agregarEquipo_campeonatoModelo($datos){
+            $sql = mainModel::conectar()->prepare("
+                                    INSERT INTO equipo_campeonato (`equipo_id_equipo`, `campeonato_id_campeonato`, `fecha_eliminacion`, `descripcion`)
+                                    VALUES (:equipo, :campeonato, NULL, NULL);
+                                        ");
+            $sql->bindParam(':equipo', $datos['eq']);   
+            $sql->bindParam(':campeonato', $datos['cp']);   
+            $sql->execute();
+
+            return $sql;
+        }
+        
+        protected static function obtenerEquipos_campeonatoModelo($id){
+            $sql = mainModel::conectar()->prepare("
+                                            SELECT *,e.nombre AS equipo, CONCAT(j.nombre,' ', j.apellido) AS capitan,
+                                                CASE e.liga
+                                                    WHEN '0'
+                                                            THEN 'Novato'
+                                                    WHEN '1'
+                                                        THEN 'Intermedio'
+                                                    WHEN '2'
+                                                        THEN 'Avanzado'
+                                                    END AS liga_nombre
+                                            FROM equipo_campeonato AS ec
+                                            INNER JOIN equipo AS e
+                                                ON  ec.equipo_id_equipo = e.id_equipo
+                                            INNER JOIN jugador as j
+                                                ON e.creado_por = j.id_jugador
+                                            WHERE ec.campeonato_id_campeonato = :camp
+                                        ");
+            $sql->bindParam(':camp', $id);   
+  
+            $sql->execute();
+
+            return $sql;
+        }
 
         protected static function obtener_campeonatoXidModelo($id){
             $sql = mainModel::conectar()->prepare("

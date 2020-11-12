@@ -45,7 +45,7 @@
                             <img class="card-img-top"  style="width: 18rem;" src="<?php echo SERVERURL; ?>vistas/assets/img/cancha.jpg" alt="Card image cap">
                             <div class="card-body">
 								<h5 class="card-title"><?php echo $c['nombre']; ?></h5>
-								<p class="card-text"><?php echo $c['descripcion']. ", cuenta con una capacidad para ".$cd['capacidad']." personas"; ?></p>
+								<p class="card-text"><?php echo $c['descripcion']. ", cuenta con una capacidad para ".$c['capacidad']." personas"; ?></p>
 								<p class="card-text"><?php echo "La cancha cuenta con una superficie ".$c['superficie']; ?></p>
 <?php							
 								if($_SESSION['tipo_RAF'] == "jugador"){
@@ -53,6 +53,10 @@
 								<form action="<?php echo SERVERURL; ?>agregarReserva" method="POST"> 
 									<input name="id_cancha" value="<?php echo $c['id_cancha'] ?>" hidden >
 									<button type="submit" class="btn btn-primary">RESERVAR</button>
+								</form>
+								<form action="<?php echo SERVERURL; ?>agregarReto" method="POST"> 
+									<input name="id_cancha" value="<?php echo $c['id_cancha'] ?>" hidden >
+									<button type="submit" class="btn btn-primary">LANZAR RETO</button>
 								</form>
 <?php
 								}
