@@ -2,12 +2,15 @@
     require_once "./controlador/c_deportivoControlador.php";
 
     $c_deportivo = new c_deportivoControlador();
-    $c_deportivos = $c_deportivo->obtener_cDeportivosControlador();
+    $id_cuenta = $_SESSION['idCuenta_RAF'];
+    $cd = $c_deportivo->Obtener_cdXidcuentaControlador($id_cuenta);
+    $id = $cd['id_c_deportivo'];
+
 
 ?>
 <div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-slideshare"></i> CAMPEONATO <small><?php echo $_SESSION['tipo_RAF']; ?></small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-slideshare"></i> CAMPEONATO   </h1>
 			</div>
 		</div>
 
@@ -19,7 +22,7 @@
 			  		</a>
                   </li>
 <?php
-                if( $_SESSION['tipo_RAF'] != "administrador"){
+                if( $_SESSION['tipo_RAF'] == "centro deportivo"){
 ?>
 			  	<li>
                   <a href="<?php echo SERVERURL; ?>agregarCampeonato" class="btn btn-info">
@@ -50,22 +53,20 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
-								<div class="form-group label-floating">
-                                <label class="control-label">CENTRO DEPORTIVO</label>
-								<select name="id_cDeportivo" class="form-control" required>
-									<option></option>
-<?php
-									foreach($c_deportivos as $cd){
-										echo "<option value=".$cd['id_c_deportivo'].">".$cd['nombre']."</option>";
-									} 
-?>
-								</select>
-								</div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
                                 <div class="form-group label-floating">
                                     <label class="control-label">INSCRIPCION $ *</label>
                                     <input class="form-control" type="number" name="inscripcion" required="" maxlength="30">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group label-floating">
+                                <label class="control-label">NIVEL</label>
+                                    <select class="form-control" name="nivel">
+                                        <option value="0"></option>
+                                        <option value="0" >NOVATO</option>
+                                        <option value="1">INTERMEDIO</option>
+                                        <option value="2">AVANZADO</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
@@ -89,6 +90,7 @@
                         </div>
                     </div>
                 </fieldset>
+                <input  name="id_cd" value="<?php echo $cd['id_c_deportivo']; ?>" hidden>
                 <br>
                 <p class="text-center" style="margin-top: 20px;">
                     <button type="submit" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> CREAR CAMPEONATO </button>

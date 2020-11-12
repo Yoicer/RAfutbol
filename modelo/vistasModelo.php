@@ -6,7 +6,7 @@
 
             $listaBlanca=["login","home","error", "registroJugador","equipos","equipo", "agregarEquipo", "editarEquipo",
                            "cDeportivos","cDeportivo","agregarCDeportivo", "campeonatos", "editarCampeonato", "reservas",
-                           "agregarCampeonato", "agregarReserva"
+                           "agregarCampeonato", "agregarReserva","campeonato"
                      ];
             
             if (in_array($vistas , $listaBlanca)) {

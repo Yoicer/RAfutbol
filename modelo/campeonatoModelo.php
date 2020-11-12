@@ -10,12 +10,13 @@
     class campeonatoModelo extends mainModel
     {
         protected static function obtener_campeonatosModelo(){
+            $hoy = date("Y-m-d");
             $sql = mainModel::conectar()->prepare("
                                                     SELECT 
                                                     c.id_campeonato, c.nombre, c.inscripcion, 
                                                     c.fecha_apertura, c.fecha_final, c.descripcion, 
+                                                    cd.id_c_deportivo As id_cd,
                                                     cd.nombre AS cd_nombre, cd.direccion, cd.ciudad, 
-                                                    cd.capacidad,
                                         CASE c.estado
                                                 WHEN '0'
                                                 THEN 'Abierto'
@@ -33,9 +34,10 @@
                                         FROM campeonato as c
                                         INNER JOIN c_deportivo as cd
                                              on c.c_deportivo_id = cd.id_c_deportivo
-                                        WHERE c.estado = 0
+                                        WHERE c.fecha_apertura > :hoy
 
                                                 ");
+            $sql->bindParam(':hoy', $hoy);
 
             $sql->execute();
             return $sql;
@@ -53,7 +55,8 @@
                                                         tipo, 
                                                         descripcion, 
                                                         ganador, 
-                                                        c_deportivo_id
+                                                        c_deportivo_id,
+                                                        creado_el
                                                     )
                                         VALUES 
                                         (
@@ -62,10 +65,11 @@
                                             :apertura, 
                                             :final, 
                                             '0', 
-                                            '0', 
+                                            :nivel, 
                                             :descripcion, 
                                             'null', 
-                                            :id_cd
+                                            :id_cd,
+                                            now()
                                         );
                                                 ");
             $sql->bindParam(':nombre', $datos['nombre']);   
@@ -73,10 +77,49 @@
             $sql->bindParam(':apertura', $datos['apertura']);   
             $sql->bindParam(':final', $datos['final']); 
             $sql->bindParam(':descripcion', $datos['descripcion']);   
-            $sql->bindParam(':id_cd', $datos['id_cd']);                                   
+            $sql->bindParam(':id_cd', $datos['id_cd']); 
+            $sql->bindParam(':nivel', $datos['nivel']);                                   
 
             $sql->execute();
 
             return $sql;
+        }
+
+        protected static function eliminar_campeonatoModelo($id){
+            $sql = mainModel::conectar()->prepare("
+                                        DELETE FROM campeonato
+                                        WHERE id_campeonato = :id
+                                        ");
+            $sql->bindParam(':id', $id);   
+            $sql->execute();
+
+            return $sql;
+        }
+
+        protected static function obtener_campeonatoXidModelo($id){
+            $sql = mainModel::conectar()->prepare("
+                                        SELECT 
+                                                c.id_campeonato, c.nombre, c.inscripcion, 
+                                                c.fecha_apertura, c.fecha_final, c.descripcion, 
+                                                cd.id_c_deportivo As id_cd,
+                                                cd.nombre AS cd_nombre, cd.direccion, cd.ciudad, 
+                                        CASE c.tipo
+                                                WHEN '0'
+                                                        THEN 'Novato'
+                                                WHEN '1'
+                                                    THEN 'Intermedio'
+                                                WHEN '2'
+                                                    THEN 'Avanzado'
+                                                END AS liga_nombre
+                                        FROM campeonato as c
+                                        INNER JOIN c_deportivo as cd
+                                            on c.c_deportivo_id = cd.id_c_deportivo
+                                        WHERE c.id_campeonato = :id
+
+                                            ");
+            $sql->bindParam(':id', $id);
+
+            $sql->execute();
+            return $sql->fetch();
         }
     }

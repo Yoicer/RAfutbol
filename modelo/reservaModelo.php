@@ -12,7 +12,7 @@
                                         SELECT
                                             r.id_reserva, r.fecha, tr.nombre, tr.horario,
                                             c.nombre AS cancha, c.superficie, cd.nombre AS c_deportivo, 
-                                            cd.direccion, cd.ciudad, cd.capacidad
+                                            cd.direccion, cd.ciudad, c.capacidad
                                         FROM reserva AS r
                                         INNER JOIN tipo_reserva AS tr
                                             ON tr.id = r.tipo_reserva_id
@@ -32,7 +32,7 @@
                                             SELECT
                                                 r.id_reserva, r.fecha, tr.nombre, tr.horario,
                                                 c.nombre AS cancha, c.superficie, cd.nombre AS c_deportivo, 
-                                                cd.direccion, cd.ciudad, cd.capacidad
+                                                cd.direccion, cd.ciudad, c.capacidad
                                             FROM reserva AS r
                                             INNER JOIN tipo_reserva AS tr
                                                 ON tr.id = r.tipo_reserva_id
@@ -52,7 +52,7 @@
                                         SELECT
                                             r.id_reserva, r.fecha, tr.nombre, tr.horario,
                                             c.nombre AS cancha, c.superficie, cd.nombre AS c_deportivo, 
-                                            cd.direccion, cd.ciudad, cd.capacidad
+                                            cd.direccion, cd.ciudad, c.capacidad
                                         FROM reserva AS r
                                         INNER JOIN tipo_reserva AS tr
                                             ON tr.id = r.tipo_reserva_id
