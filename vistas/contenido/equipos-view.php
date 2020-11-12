@@ -7,15 +7,15 @@
     $equipos = $equipo->obtener_equiposControlador();
 
     if(isset($_POST['id_eliminar'])){
-        $equipo->eliminar_equipoControlador();
+       $equipo->eliminar_equipoControlador();
 	}
 	if(isset($_POST['id_unirse'])){
         $equipo->asignarJugador_equipoControlador();
     }
 ?>
-<div class="container-fluid">
+		<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-accounts-alt"></i> EQUIPOS <small><?php echo $_SESSION['tipo_RAF']; ?></small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-accounts-alt"></i> EQUIPOS </h1>
 			</div>
 		</div>
 
@@ -79,10 +79,10 @@
 										echo "<th scope='col'>".$eqp['liga_nombre']."</th>";
 										echo "<th scope='col'>".$eqp['capitan']."</th>";
 										echo "<th scope='col'>".$eqp['descripcion']."</th>";
-										echo "<th scope='col'>".$eqp['miembros']."/14</th>";
+										echo "<th scope='col'>".$eqp['miembros']."/9</th>";
 
 									if($_SESSION['tipo_RAF'] == "administrador"){
-										if($eqp['miembros'] < 7){
+										if($eqp['miembros'] < 3){
 ?>
                                     <td>
                                         <form action="" method="POST" >
@@ -95,7 +95,7 @@
 										
 <?php
 										}
-									}elseif($_SESSION['tipo_RAF'] == "jugador" AND $usuario[0]['equipo_id'] == '0'){
+									}elseif($_SESSION['tipo_RAF'] == "jugador" AND $usuario[0]['equipo_id'] == '0' AND $eqp['miembros'] <= 9){
 ?>
 									 <td>
                                         <form action="" method="POST" >
@@ -109,8 +109,7 @@
 <?php
 									}
 ?>
-									</tr>
-									
+									</tr>	
 <?php                             }
 ?>
 							</tbody>

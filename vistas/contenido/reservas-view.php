@@ -1,6 +1,7 @@
 <?php
     require_once "./controlador/reservaControlador.php";
-    require_once "./controlador/jugadorControlador.php";
+	require_once "./controlador/jugadorControlador.php";
+	require_once "./controlador/c_deportivoControlador.php";
 
     $reserva = new reservaControlador();
 
@@ -8,20 +9,29 @@
         $jugador = new jugadorControlador();
         $usuario = $jugador->Obtener_jugadorXidcuentaControlador();
 
-        $id = $usuario[0]['id_jugador'];
-        $reservas = $reserva->obtener_reservasXjugadorControlador($id);
-    }else{
-        $reservas = $reserva->obtener_reservasControlador();
-    }
+		$id = $usuario[0]['id_jugador'];
+		$reservas = $reserva->obtener_reservasXjugadorControlador($id);
+		
+    }elseif($_SESSION['tipo_RAF'] == "administrador"){
+		$reservas = $reserva->obtener_reservasControlador();
+		
+    }elseif($_SESSION['tipo_RAF'] == "centro deportivo"){
+		$c_deportivo = new c_deportivoControlador();
+		$id_cuenta = $_SESSION['idCuenta_RAF'];
+		$cd = $c_deportivo->Obtener_cdXidcuentaControlador($id_cuenta);
+		$id = $cd['id_c_deportivo'];
+
+		$reservas = $reserva->obtener_reservascdControlador($id);
+	}
     
 
     if(isset($_POST['id_eliminar'])){
-       # $equipo->eliminar_reservaControlador();
+     $reserva->eliminar_reservaControlador();
     }
 ?>
 <div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-calendar"></i> RESERVAS <small><?php echo $_SESSION['tipo_RAF']; ?></small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-calendar"></i> RESERVAS </h1>
 			</div>
 		</div>
 
@@ -36,7 +46,7 @@
                 if( $_SESSION['tipo_RAF'] == "jugador"){
 ?>
 			  	<li>
-                  <a href="<?php echo SERVERURL; ?>agregarReserva" class="btn btn-info">
+                  <a href="<?php echo SERVERURL; ?>cDeportivos" class="btn btn-info">
 			  			<i class="zmdi zmdi-plus"></i> &nbsp; NUEVA RESERVA
 			  		</a>
                   </li>
@@ -60,6 +70,7 @@
 									<th class="text-center">CANCHA</th>
 									<th class="text-center">SUPERFICIE</th>
 									<th class="text-center">FECHA</th>
+									<th class="text-center">HORARIO</th>
 									<th class="text-center">CENTRO DEPORTIVO</th>
 									<th class="text-center">DIRECCION</th>
                                     <th class="text-center">CIUDAD</th>
@@ -72,20 +83,15 @@
                                         echo "<tr>";
                                         echo "<th scope='col'>".$resv['cancha']."</th>";
                                         echo "<th scope='col'>".$resv['superficie']."</th>";
-                                        echo "<th scope='col'>".$resv['fecha']."</th>";
+										echo "<th scope='col'>".$resv['fecha']."</th>";
+										echo "<th scope='col'>".$resv['horario']." de la ".$resv['nombre']."</th>";
                                         echo "<th scope='col'>".$resv['c_deportivo']."</th>";
                                         echo "<th scope='col'>".$resv['direccion']."</th>";
                                         echo "<th scope='col'>".$resv['ciudad']."</th>";
-                                        echo "<th scope='col'>".$resv['capacidad']." PERSONAS</th>";
+										echo "<th scope='col'>".$resv['capacidad']." PERSONAS</th>";
+
+										if($_SESSION['tipo_RAF'] != "administrador") {
 ?>
-									<td>
-                                        <form action="<?php echo SERVERURL; ?>editarReserva" method="POST">
-                                            <input name="id_editar" value="<?php echo $resv['id_reserva'] ?>" hidden >
-											<button type="submit" class="btn btn-info btn-raised btn-xs">
-												<i class="zmdi zmdi-edit"></i>
-											</button>
-										</form>
-                                    </td>
                                     <td>
                                         <form action="" method="POST">
                                             <input name="id_eliminar" value="<?php echo $resv['id_reserva'] ?>" hidden >
@@ -93,7 +99,10 @@
 												<i class="zmdi zmdi-delete"></i>
 											</button>
 										</form>
-                                    </td>
+									</td>
+									<?php
+									}
+?>
                                     </tr>
 <?php                             }
 ?>

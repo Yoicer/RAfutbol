@@ -68,7 +68,6 @@
                                         echo "<th scope='col'>".$mb['nivel_nombre']."</th>";
 										echo "<th scope='col'>".$mb['celular']."</th>";
 										echo "<th scope='col'>".$mb['ciudad']."</th>";
-									if($mb['id_jugador'] != $eqpo['creado_por']){
 										if($usuario[0]['id_jugador'] == $eqpo['creado_por'] || $usuario[0]['id_jugador'] == $mb['id_jugador'] ){
 ?>
 										<td>
@@ -81,7 +80,7 @@
 										</td>	
 									</tr>								
 <?php                             
-										}
+										
 									}
 								}
 ?>

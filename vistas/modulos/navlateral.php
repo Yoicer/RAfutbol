@@ -40,8 +40,8 @@
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo SERVERURL; ?>campeonatos">
-						<i class="zmdi zmdi-slideshare"></i> Campeonatos
+					<a href="<?php echo SERVERURL; ?>cDeportivos">
+						<i class="zmdi zmdi-storage"></i> Centros Deportivos
 					</a>
 				</li>
 				<li>
@@ -49,6 +49,12 @@
 						<i class="zmdi zmdi-calendar"></i> Reservas 
 					</a>
 				</li>
+				<li>
+					<a href="<?php echo SERVERURL; ?>campeonatos">
+						<i class="zmdi zmdi-slideshare"></i> Campeonatos
+					</a>
+				</li>
+				
 			</ul>
 		</div>
 	</section>

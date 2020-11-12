@@ -25,7 +25,6 @@
                 echo mainModel::sweet_alert($alerta);
   
             }
-            
         }
 
         public function obtenerXid_equipoControlador($id){
