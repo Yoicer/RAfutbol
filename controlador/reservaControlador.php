@@ -95,4 +95,10 @@
             }
             return mainModel::sweet_alert($alerta);
         }
+
+        public function obtener_jugadores(){
+            $jugadores = reservaModelo::Obtener_jugadores();
+
+            return $jugadores;
+        }
     }

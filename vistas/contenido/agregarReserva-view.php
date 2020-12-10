@@ -39,7 +39,7 @@
 <?php
                                         foreach($t_reserva as $tr){
 ?>
-                                        <option value="<?php echo $tr['id']; ?>"><?php echo $tr['nombre']." de ".$tr['horario']; ?></option>
+                                        <option value="<?php echo $tr['id']; ?>"><?php echo $tr['nombre']." ".$tr['horario']; ?></option>
 <?php 
                                         } 
 ?>

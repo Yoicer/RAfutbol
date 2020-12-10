@@ -80,7 +80,7 @@
 
             
             $consulta1 = mainModel::ejecutar_consulta_simple("
-                                                    SELECT nombre FROM equipo WHERE nombre = $nombre"
+                                                    SELECT nombre FROM equipo WHERE nombre = '$nombre'"
                                                 );
 
                 if($consulta1->rowCount() >= 1){

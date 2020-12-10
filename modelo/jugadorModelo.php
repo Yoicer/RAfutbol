@@ -10,8 +10,8 @@
         protected static function agregar_jugadorModelo($datos){
                 $sql = mainModel::conectar()->prepare("
                                             INSERT INTO `jugador` (
-                                                nombre, apellido, celular, nivel, cedula, ciudad, posicion, 
-                                                cuenta_id_cuenta, equipo_id_equipo 
+                                                nombre, apellido, celular, nivel, cedula, posicion, 
+                                                cuenta_id_cuenta, equipo_id, ciudad
                                                  )
                                             VALUES (
                                                 :nombre,
@@ -19,10 +19,10 @@
                                                 :celular,
                                                 '0',
                                                 :cedula,
-                                                :ciudad,
                                                 :posicion,
                                                 :id_cuenta,
-                                                '0'  
+                                                '0',
+                                                :ciudad
                                             );"
                                         );
                 $sql->bindParam(':nombre',$datos['nombre']);

@@ -4,6 +4,7 @@
     $reserva = new reservaControlador();
     $t_reserva = $reserva->Obtener_t_reservaControlador();
     $id_cancha = $_POST['id_cancha'];
+    $jugadores = $reserva->obtener_jugadores();
 
 ?>
 <div class="container-fluid">
@@ -46,6 +47,22 @@
                                         foreach($t_reserva as $tr){
 ?>
                                         <option value="<?php echo $tr['id']; ?>"><?php echo $tr['nombre']." de ".$tr['horario']; ?></option>
+<?php 
+                                        } 
+?>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Reto Directo</label>
+                                    
+                                        <select class="form-control" id="reta" name="reta" required >
+                                        <option value="0"></option>
+<?php
+                                        foreach($jugadores as $jg){
+?>
+                                        <option value="<?php echo $jg['id_jugador']; ?>"><?php echo $jg['nombre']." ".$jg['apellido']; ?></option>
 <?php 
                                         } 
 ?>

@@ -73,6 +73,15 @@
             return $sql;
         }
 
+        protected function Obtener_jugadores(){
+            $sql = mainModel::conectar()->prepare("
+                                                SELECT * 
+                                                FROM `jugador`
+                                                ");
+            $sql->execute();
+            return $sql;
+        }
+
         protected static function agregar_reservaModelo($datos){
             $sql = mainModel::conectar()->prepare("
                                         INSERT INTO `reserva` (
